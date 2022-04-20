@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ManageOnline.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Manage User</h2>
+
+<style>
+    .un_use {
+        margin-bottom: 10px;
+        text-decoration: none;
+        float: right;
+    }
+
+    .input-group {
+        display: block;
+    }
+</style>
+
+<button class="btn btn-success un_use text-info">
+    @Html.ActionLink("Create New", "Create")
+</button>
+<div class="row">
+    <div class="col-xs-6 col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" id="txtSearch" />
+            <div class="input-group-btn">
+                <button class="btn btn-primary" id="btnSearch">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Password)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.State)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.UserID }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Details", "Details", new { id = item.UserID }, new
+   {
+       @class = "btn btn-primary"
+   }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.UserID }, new
+   {
+       @class = "btn btn-danger"
+   })
+    </td>
+</tr>
+    }
+
+</table>
+<script>
+    $('#btnSearch').on('click', function () {
+        var typing = $('#txtSearch').val();
+        window.location.href = "/User/Search?name=" + typing;
+    })
+</script>

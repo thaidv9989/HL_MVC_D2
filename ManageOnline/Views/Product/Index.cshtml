@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ManageOnline.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .un_use{
+        
+        margin-bottom: 10px;
+        text-decoration: none;
+        float: right;
+    }
+    .input-group{
+        display: block;
+    }
+    
+</style>
+<h2 class="text-center">Manage Product</h2>
+<button class="btn btn-success un_use text-inf" >
+    @Html.ActionLink("Create New", "Create")
+</button>
+<div class="row">
+    <div class="col-xs-6 col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" id="txtSearch" />
+            <div class="input-group-btn">
+                <button class="btn btn-primary" id="btnSearch">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_Img)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Category_Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_Img)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Category_Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Product_Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Product_Id }, new
+               {
+                   @class = "btn btn-primary"
+               }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Product_Id }, new
+               {
+                   @class = "btn btn-danger"
+               })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+<script>
+    $('#btnSearch').on('click', function () {
+        var typing = $('#txtSearch').val();
+        window.location.href = "/Product/Search?name=" + typing;
+    })
+</script>
